@@ -21,4 +21,8 @@ export class BoardRepository {
   async update(board) {
     return this.db.updateBoard(board);
   }
+
+  async deleteBoard(id) {
+    await this.db.deleteBoard(id);
+  }
 }

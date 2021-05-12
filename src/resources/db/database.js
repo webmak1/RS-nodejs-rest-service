@@ -49,4 +49,8 @@ export class Database {
       elem.id === board.id ? board : elem
     );
   }
+
+  async deleteBoard(id) {
+    this._boards = this._boards.filter((elem) => elem.id !== id);
+  }
 }

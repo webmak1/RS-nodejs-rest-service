@@ -10,6 +10,7 @@ export class BoardController {
     this.create = this.create.bind(this);
     this.getById = this.getById.bind(this);
     this.update = this.update.bind(this);
+    this.delete = this.delete.bind(this);
     this.routes();
   }
 
@@ -44,10 +45,21 @@ export class BoardController {
     }
   }
 
+  async delete(req, res, next) {
+    const { id } = req.params;
+    try {
+      await this.boardService.deleteBoard(id);
+      res.status(200).json({ status: 'success', statusCode: 200, message: Message.BOARD.DELETED });
+    } catch (err) {
+      next(err)
+    }
+  }
+
   routes() {
     this.router.get('/', this.getAll);
     this.router.post('/', this.create);
     this.router.get('/:id', this.getById);
     this.router.put('/:id', this.update);
+    this.router.delete('/:id', this.delete);
   }
 }

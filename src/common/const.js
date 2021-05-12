@@ -5,5 +5,6 @@ export const Message = {
   },
   BOARD: {
     UPDATED: 'The board has been updated.',
+    DELETED: 'The board has been deleted',
   }
 };
