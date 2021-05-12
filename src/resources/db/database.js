@@ -43,4 +43,10 @@ export class Database {
   async getBoardById(id) {
     return this._boards.find((board) => board.id === id);
   }
+
+  async updateBoard(board) {
+    this._boards = this._boards.map((elem) =>
+      elem.id === board.id ? board : elem
+    );
+  }
 }

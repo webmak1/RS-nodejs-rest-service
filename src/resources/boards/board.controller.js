@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { BoardService } from './board.service.js';
+import { Message } from '../../common/const.js';
 
 export class BoardController {
   constructor() {
@@ -8,6 +9,7 @@ export class BoardController {
     this.getAll = this.getAll.bind(this);
     this.create = this.create.bind(this);
     this.getById = this.getById.bind(this);
+    this.update = this.update.bind(this);
     this.routes();
   }
 
@@ -31,9 +33,21 @@ export class BoardController {
     }
   }
 
+  async update(req, res, next) {
+    const { id } = req.params;
+    const board = req.body;
+    try {
+      await this.boardService.update(id, board);
+      res.status(200).json({ status: 'success', statusCode: 200, message: Message.BOARD.UPDATED });
+    } catch (err) {
+      next(err);
+    }
+  }
+
   routes() {
     this.router.get('/', this.getAll);
     this.router.post('/', this.create);
     this.router.get('/:id', this.getById);
+    this.router.put('/:id', this.update);
   }
 }

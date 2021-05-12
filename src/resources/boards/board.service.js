@@ -21,4 +21,11 @@ export class BoardService {
     }
     return board;
   }
+
+  async update(id, board) {
+    const updatedBoard = await this.getById(id);
+    updatedBoard.title = board.title;
+    updatedBoard.columns = board.columns;
+    await this.boardRepository.update(updatedBoard);
+  }
 }

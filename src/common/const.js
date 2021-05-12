@@ -3,4 +3,7 @@ export const Message = {
     UPDATED: 'The user has been updated.',
     DELETED: 'The user has been deleted',
   },
+  BOARD: {
+    UPDATED: 'The board has been updated.',
+  }
 };

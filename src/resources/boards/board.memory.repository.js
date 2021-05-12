@@ -17,4 +17,8 @@ export class BoardRepository {
   async getById(id) {
     return this.db.getBoardById(id);
   }
+
+  async update(board) {
+    return this.db.updateBoard(board);
+  }
 }
