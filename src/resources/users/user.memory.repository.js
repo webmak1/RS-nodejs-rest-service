@@ -21,4 +21,8 @@ export class UserRepository {
   async update(user) {
     return this.db.updateUser(user);
   }
+
+  async deleteUser(id) {
+    await this.db.deleteUser(id);
+  }
 }

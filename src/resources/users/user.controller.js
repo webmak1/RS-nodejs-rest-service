@@ -11,6 +11,7 @@ export class UserController {
     this.create = this.create.bind(this);
     this.getById = this.getById.bind(this);
     this.update = this.update.bind(this);
+    this.delete = this.delete.bind(this);
     this.routes();
   }
 
@@ -45,10 +46,22 @@ export class UserController {
     }
   }
 
+  async delete(req, res, next) {
+    const { id } = req.params;
+    try {
+      await this.userService.deleteUser(id);
+      res.status(200).json({ status: 'success', statusCode: 200, message: Message.USER.DELETED });
+    } catch (err) {
+      next(err)
+    }
+  }
+
+
   routes() {
     this.router.get('/', this.getAll);
     this.router.post('/', this.create);
     this.router.get('/:id', this.getById);
     this.router.put('/:id', this.update);
+    this.router.delete('/:id', this.delete);
   }
 }

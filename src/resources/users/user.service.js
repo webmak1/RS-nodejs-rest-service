@@ -29,4 +29,9 @@ export class UserService {
     updatedUser.password = user.password;
     await this.userRepository.update(updatedUser);
   }
+
+  async deleteUser(id) {
+    await this.getById(id);
+    await this.userRepository.deleteUser(id);
+  }
 }

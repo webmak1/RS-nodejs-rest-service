@@ -20,4 +20,8 @@ export class Database {
     this._users = this._users.map((elem) => elem.id === user.id ? user : elem)
   }
 
+  async deleteUser(id) {
+    this._users = this._users.filter((elem) => elem.id !== id);
+  }
+
 }
