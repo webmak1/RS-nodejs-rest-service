@@ -1,6 +1,9 @@
-const getAll = async () => {
-  // TODO: mock implementation. should be replaced during task development
-  return [];
-};
+export class UserRepository {
+  constructor() {
+    this.users = [];
+  }
 
-module.exports = { getAll };
+  async getAll() {
+    return this.users;
+  }
+}
