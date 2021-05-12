@@ -17,4 +17,8 @@ export class UserRepository {
   async getById(id) {
     return this.db.getUserById(id);
   }
+
+  async update(user) {
+    return this.db.updateUser(user);
+  }
 }

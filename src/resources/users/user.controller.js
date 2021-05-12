@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { UserService } from './user.service.js';
 import { User } from './user.model.js';
+import { Message } from '../../common/const.js';
 
 export class UserController {
   constructor() {
@@ -9,6 +10,7 @@ export class UserController {
     this.getAll = this.getAll.bind(this);
     this.create = this.create.bind(this);
     this.getById = this.getById.bind(this);
+    this.update = this.update.bind(this);
     this.routes();
   }
 
@@ -32,9 +34,21 @@ export class UserController {
     }
   }
 
+  async update(req, res, next) {
+    const { id } = req.params;
+    const user = req.body;
+    try {
+      await this.userService.update(id, user);
+      res.status(200).json({ status: 'success', statusCode: 200, message: Message.USER.UPDATED });
+    } catch (err) {
+      next(err);
+    }
+  }
+
   routes() {
     this.router.get('/', this.getAll);
     this.router.post('/', this.create);
     this.router.get('/:id', this.getById);
+    this.router.put('/:id', this.update);
   }
 }

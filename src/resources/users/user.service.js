@@ -21,4 +21,12 @@ export class UserService {
     }
     return user;
   }
+
+  async update(id, user) {
+    const updatedUser = await this.getById(id);
+    updatedUser.name = user.name;
+    updatedUser.login = user.login;
+    updatedUser.password = user.password;
+    await this.userRepository.update(updatedUser);
+  }
 }

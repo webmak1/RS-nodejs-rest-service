@@ -16,4 +16,8 @@ export class Database {
     return this._users.find(user => user.id === id);
   }
 
+  async updateUser(user) {
+    this._users = this._users.map((elem) => elem.id === user.id ? user : elem)
+  }
+
 }
