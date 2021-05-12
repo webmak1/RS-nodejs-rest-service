@@ -5,6 +5,7 @@ import YAML from 'yamljs';
 import * as swaggerUI from 'swagger-ui-express';
 import { config } from './common/config.js';
 import { UserController } from './resources/users/user.controller.js';
+import { handleError } from './middlewares/error.js';
 
 class Server {
   constructor() {
@@ -34,6 +35,11 @@ class Server {
     });
 
     this.app.use('/users', this.userController.router);
+
+    this.app.use((err, req, res, next) => {
+      handleError(err, res);
+      next();
+    });
   }
 
   start() {
