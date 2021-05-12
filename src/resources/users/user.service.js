@@ -8,4 +8,8 @@ export class UserService {
   async getAll() {
     return this.userRepository.getAll();
   }
+
+  async create(user) {
+    return this.userRepository.create(user);
+  }
 }

@@ -1,4 +1,5 @@
 import { Database } from '../db/database.js';
+import { User } from './user.model.js';
 
 export class UserRepository {
   constructor() {
@@ -7,5 +8,9 @@ export class UserRepository {
 
   async getAll() {
     return this.db.getUsers();
+  }
+
+  async create(user) {
+    return this.db.addUser(new User(user));
   }
 }

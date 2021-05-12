@@ -7,4 +7,9 @@ export class Database {
     return this._users;
   }
 
+  async addUser(user) {
+    await this._users.push(user);
+    return user;
+  }
+
 }
