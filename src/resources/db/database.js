@@ -2,6 +2,7 @@ export class Database {
   constructor() {
     this._users = [];
     this._boards = [];
+    this._tasks = [];
   }
 
   // User
@@ -53,4 +54,18 @@ export class Database {
   async deleteBoard(id) {
     this._boards = this._boards.filter((elem) => elem.id !== id);
   }
+
+  // Task
+
+  async getTasks(boardId) {
+     this._tasks = this._tasks.filter((task) => task.boardId === boardId);
+     return this._tasks;
+  }
+
+  async addTask(task) {
+    await this._tasks.push(task);
+    return task;
+  }
 }
+
+export const database = new Database();

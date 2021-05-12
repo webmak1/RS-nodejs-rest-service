@@ -5,7 +5,8 @@ import YAML from 'yamljs';
 import * as swaggerUI from 'swagger-ui-express';
 import { config } from './common/config.js';
 import { UserController } from './resources/users/user.controller.js';
-import {BoardController} from './resources/boards/board.controller.js';
+import { BoardController } from './resources/boards/board.controller.js';
+import { TaskController } from './resources/tasks/task.controller.js';
 import { handleError } from './middlewares/error.js';
 
 class Server {
@@ -16,6 +17,7 @@ class Server {
     );
     this.userController = new UserController();
     this.boardController = new BoardController();
+    this.taskController = new TaskController();
     this.routes();
   }
 
@@ -38,6 +40,7 @@ class Server {
 
     this.app.use('/users', this.userController.router);
     this.app.use('/boards', this.boardController.router);
+    this.app.use('/boards/:id/tasks', this.taskController.router);
 
     this.app.use((err, req, res, next) => {
       handleError(err, res);

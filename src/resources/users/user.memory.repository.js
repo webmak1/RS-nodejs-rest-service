@@ -1,10 +1,7 @@
-import { Database } from '../db/database.js';
 import { User } from './user.model.js';
+import { Repository } from '../../common/repository.js';
 
-export class UserRepository {
-  constructor() {
-    this.db = new Database();
-  }
+export class UserRepository extends Repository{
 
   async getAll() {
     return this.db.getUsers();

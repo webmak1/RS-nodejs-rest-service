@@ -1,10 +1,7 @@
-import { Database } from '../db/database.js';
 import { Board } from './board.model.js';
+import { Repository } from '../../common/repository.js';
 
-export class BoardRepository {
-  constructor() {
-    this.db = new Database();
-  }
+export class BoardRepository extends Repository {
 
   async getAll() {
     return this.db.getBoards();
