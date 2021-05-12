@@ -6,6 +6,7 @@ export class BoardController {
     this.boardService = new BoardService();
     this.router = Router();
     this.getAll = this.getAll.bind(this);
+    this.create = this.create.bind(this);
     this.routes();
   }
 
@@ -14,7 +15,13 @@ export class BoardController {
     res.json(boards);
   }
 
+  async create(req, res) {
+    const board = await this.boardService.create(req.body);
+    res.status(201).json(board);
+  }
+
   routes() {
     this.router.get('/', this.getAll);
+    this.router.post('/', this.create);
   }
 }

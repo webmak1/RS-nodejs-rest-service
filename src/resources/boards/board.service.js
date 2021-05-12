@@ -8,4 +8,8 @@ export class BoardService {
   async getAll() {
     return this.boardRepository.getAll();
   }
+
+  async create(board) {
+    return this.boardRepository.create(board);
+  }
 }
