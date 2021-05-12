@@ -6,4 +6,7 @@ export class TaskRepository extends Repository {
     return this.db.getTasks(boardId);
   }
 
+  async create(task) {
+    return this.db.addTask(task)
+  }
 }

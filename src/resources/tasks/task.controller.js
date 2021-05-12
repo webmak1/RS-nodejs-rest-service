@@ -6,6 +6,7 @@ export class TaskController {
     this.taskService = new TaskService();
     this.router = Router({ mergeParams: true });
     this.getAll = this.getAll.bind(this);
+    this.create = this.create.bind(this);
     this.routes();
   }
 
@@ -19,7 +20,18 @@ export class TaskController {
     }
   }
 
+  async create(req, res, next) {
+    try {
+      const { id } = req.params;
+      const tasks = await this.taskService.create(id, req.body);
+      res.json(tasks);
+    } catch (err) {
+      next(err);
+    }
+  }
+
   routes() {
     this.router.get('/', this.getAll);
+    this.router.post('/', this.create);
   }
 }
