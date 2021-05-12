@@ -22,10 +22,14 @@ export class UserController {
     res.status(201).json(User.toResponse(user));
   }
 
-  async getById(req, res) {
+  async getById(req, res, next) {
     const { id } = req.params;
-    const user = await this.userService.getById(id);
-    res.status(200).json(User.toResponse(user));
+    try {
+      const user = await this.userService.getById(id);
+      res.status(200).json(User.toResponse(user));
+    } catch (err) {
+      next(err);
+    }
   }
 
   routes() {

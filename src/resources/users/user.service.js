@@ -1,4 +1,5 @@
 import { UserRepository } from './user.memory.repository.js';
+import { ErrorHandler } from '../../middlewares/error.js';
 
 export class UserService {
   constructor() {
@@ -14,6 +15,10 @@ export class UserService {
   }
 
   async getById(id) {
-    return this.userRepository.getById(id);
+    const user = await this.userRepository.getById(id);
+    if (!user) {
+      throw new ErrorHandler(404, `User with id ${id} not found`);
+    }
+    return user;
   }
 }
