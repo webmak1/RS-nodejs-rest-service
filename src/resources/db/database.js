@@ -39,4 +39,8 @@ export class Database {
     await this._boards.push(board);
     return board;
   }
+
+  async getBoardById(id) {
+    return this._boards.find((board) => board.id === id);
+  }
 }

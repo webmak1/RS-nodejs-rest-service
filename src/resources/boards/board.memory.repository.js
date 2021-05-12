@@ -13,4 +13,8 @@ export class BoardRepository {
   async create(board) {
     return this.db.addBoard(new Board(board));
   }
+
+  async getById(id) {
+    return this.db.getBoardById(id);
+  }
 }

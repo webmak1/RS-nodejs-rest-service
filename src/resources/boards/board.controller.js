@@ -7,6 +7,7 @@ export class BoardController {
     this.router = Router();
     this.getAll = this.getAll.bind(this);
     this.create = this.create.bind(this);
+    this.getById = this.getById.bind(this);
     this.routes();
   }
 
@@ -20,8 +21,19 @@ export class BoardController {
     res.status(201).json(board);
   }
 
+  async getById(req, res, next) {
+    const { id } = req.params;
+    try {
+      const board = await this.boardService.getById(id);
+      res.status(200).json(board);
+    } catch (err) {
+      next(err);
+    }
+  }
+
   routes() {
     this.router.get('/', this.getAll);
     this.router.post('/', this.create);
+    this.router.get('/:id', this.getById);
   }
 }
