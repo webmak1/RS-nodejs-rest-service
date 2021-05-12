@@ -13,4 +13,8 @@ export class UserRepository {
   async create(user) {
     return this.db.addUser(new User(user));
   }
+
+  async getById(id) {
+    return this.db.getUserById(id);
+  }
 }

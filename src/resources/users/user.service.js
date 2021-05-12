@@ -12,4 +12,8 @@ export class UserService {
   async create(user) {
     return this.userRepository.create(user);
   }
+
+  async getById(id) {
+    return this.userRepository.getById(id);
+  }
 }

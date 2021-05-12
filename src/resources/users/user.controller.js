@@ -8,6 +8,7 @@ export class UserController {
     this.router = Router();
     this.getAll = this.getAll.bind(this);
     this.create = this.create.bind(this);
+    this.getById = this.getById.bind(this);
     this.routes();
   }
 
@@ -21,8 +22,15 @@ export class UserController {
     res.status(201).json(User.toResponse(user));
   }
 
+  async getById(req, res) {
+    const { id } = req.params;
+    const user = await this.userService.getById(id);
+    res.status(200).json(User.toResponse(user));
+  }
+
   routes() {
     this.router.get('/', this.getAll);
     this.router.post('/', this.create);
+    this.router.get('/:id', this.getById);
   }
 }

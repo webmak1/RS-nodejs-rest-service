@@ -12,4 +12,8 @@ export class Database {
     return user;
   }
 
+  async getUserById(id) {
+    return this._users.find(user => user.id === id);
+  }
+
 }
