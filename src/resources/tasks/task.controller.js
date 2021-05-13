@@ -5,15 +5,10 @@ export class TaskController {
   constructor() {
     this.taskService = new TaskService();
     this.router = Router({ mergeParams: true });
-    this.getAll = this.getAll.bind(this);
-    this.create = this.create.bind(this);
-    this.getById = this.getById.bind(this);
-    this.update = this.update.bind(this);
-    this.delete = this.delete.bind(this);
     this.routes();
   }
 
-  async getAll(req, res, next) {
+  getAll = async (req, res, next) => {
     try {
       const { boardId } = req.params;
       const tasks = await this.taskService.getAll(boardId);
@@ -23,7 +18,7 @@ export class TaskController {
     }
   }
 
-  async create(req, res, next) {
+  create = async (req, res, next) => {
     try {
       const { boardId } = req.params;
       const tasks = await this.taskService.create(boardId, req.body);
@@ -33,7 +28,7 @@ export class TaskController {
     }
   }
 
-  async getById(req, res, next) {
+  getById = async (req, res, next) => {
     try {
       const { id, boardId } = req.params;
       const task = await this.taskService.getById(id, boardId);
@@ -43,7 +38,7 @@ export class TaskController {
     }
   }
 
-  async update(req, res, next) {
+  update = async (req, res, next) => {
     try {
       const { id, boardId } = req.params;
       const task = await this.taskService.update(id, boardId, req.body);
@@ -53,7 +48,7 @@ export class TaskController {
     }
   }
 
-  async delete(req, res, next) {
+  delete = async (req, res, next) => {
     try {
       const { id, boardId } = req.params;
       await this.taskService.delete(id, boardId);

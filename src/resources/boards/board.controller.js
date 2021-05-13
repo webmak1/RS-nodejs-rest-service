@@ -6,25 +6,20 @@ export class BoardController {
   constructor() {
     this.boardService = new BoardService();
     this.router = Router();
-    this.getAll = this.getAll.bind(this);
-    this.create = this.create.bind(this);
-    this.getById = this.getById.bind(this);
-    this.update = this.update.bind(this);
-    this.delete = this.delete.bind(this);
     this.routes();
   }
 
-  async getAll(req, res) {
+  getAll = async (req, res) => {
     const boards = await this.boardService.getAll();
     res.json(boards);
   }
 
-  async create(req, res) {
+  create = async (req, res) => {
     const board = await this.boardService.create(req.body);
     res.status(201).json(board);
   }
 
-  async getById(req, res, next) {
+  getById = async (req, res, next) => {
     const { id } = req.params;
     try {
       const board = await this.boardService.getById(id);
@@ -34,7 +29,7 @@ export class BoardController {
     }
   }
 
-  async update(req, res, next) {
+  update = async (req, res, next) => {
     const { id } = req.params;
     const board = req.body;
     try {
@@ -51,7 +46,7 @@ export class BoardController {
     }
   }
 
-  async delete(req, res, next) {
+  delete = async (req, res, next) => {
     const { id } = req.params;
     try {
       await this.boardService.deleteBoard(id);

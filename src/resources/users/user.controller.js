@@ -7,25 +7,20 @@ export class UserController {
   constructor() {
     this.userService = new UserService();
     this.router = Router();
-    this.getAll = this.getAll.bind(this);
-    this.create = this.create.bind(this);
-    this.getById = this.getById.bind(this);
-    this.update = this.update.bind(this);
-    this.delete = this.delete.bind(this);
     this.routes();
   }
 
-  async getAll(req, res) {
+  getAll = async (req, res) => {
     const users = await this.userService.getAll();
     res.json(users.map(User.toResponse));
   }
 
-  async create(req, res) {
+  create = async (req, res) => {
     const user = await this.userService.create(req.body);
     res.status(201).json(User.toResponse(user));
   }
 
-  async getById(req, res, next) {
+  getById = async (req, res, next) => {
     const { id } = req.params;
     try {
       const user = await this.userService.getById(id);
@@ -35,7 +30,7 @@ export class UserController {
     }
   }
 
-  async update(req, res, next) {
+  update = async (req, res, next) => {
     const { id } = req.params;
     const user = req.body;
     try {
@@ -52,7 +47,7 @@ export class UserController {
     }
   }
 
-  async delete(req, res, next) {
+  delete = async (req, res, next) => {
     const { id } = req.params;
     try {
       await this.userService.deleteUser(id);
