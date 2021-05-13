@@ -8,6 +8,6 @@ export class Column {
   }
 
   static createColumns(columns) {
-    return columns.map(column => new Column(column))
+    return columns.map((column) => new Column(column));
   }
 }

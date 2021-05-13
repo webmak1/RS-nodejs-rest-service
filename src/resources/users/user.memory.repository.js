@@ -1,8 +1,7 @@
 import { User } from './user.model.js';
 import { Repository } from '../../common/repository.js';
 
-export class UserRepository extends Repository{
-
+export class UserRepository extends Repository {
   async getAll() {
     return this.db.getUsers();
   }

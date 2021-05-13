@@ -57,14 +57,40 @@ export class Database {
 
   // Task
 
+  async removeByBoard(boardId) {
+    this._tasks = this._tasks.filter((task) => task.boardId !== boardId);
+  }
+
+  async unassignUserTasks(userId) {
+    this._tasks = this._tasks.map((task) =>
+      task.userId === userId ? { ...task, userId: null } : task
+    );
+  }
+
   async getTasks(boardId) {
-     this._tasks = this._tasks.filter((task) => task.boardId === boardId);
-     return this._tasks;
+    this._tasks = this._tasks.filter((task) => task.boardId === boardId);
+    return this._tasks;
   }
 
   async addTask(task) {
     await this._tasks.push(task);
     return task;
+  }
+
+  async getTaskById(id, boardId) {
+    return this._tasks.find(
+      (task) => task.id === id && task.boardId === boardId
+    );
+  }
+
+  async updateTask(task) {
+    this._tasks = this._tasks.map((elem) =>
+      task.id === elem.id ? task : elem
+    );
+  }
+
+  async deleteTask(id) {
+    this._tasks = this._tasks.filter((task) => task.id !== id);
   }
 }
 

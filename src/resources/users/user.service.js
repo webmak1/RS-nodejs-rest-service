@@ -1,9 +1,11 @@
 import { UserRepository } from './user.memory.repository.js';
 import { ErrorHandler } from '../../middlewares/error.js';
+import { TaskService } from '../tasks/task.service.js';
 
 export class UserService {
   constructor() {
     this.userRepository = new UserRepository();
+    this.taskService = new TaskService();
   }
 
   async getAll() {
@@ -33,5 +35,6 @@ export class UserService {
   async deleteUser(id) {
     await this.getById(id);
     await this.userRepository.deleteUser(id);
+    await this.taskService.unassignUserTasks(id);
   }
 }

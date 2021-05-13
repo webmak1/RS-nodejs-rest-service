@@ -40,7 +40,13 @@ export class UserController {
     const user = req.body;
     try {
       await this.userService.update(id, user);
-      res.status(200).json({ status: 'success', statusCode: 200, message: Message.USER.UPDATED });
+      res
+        .status(200)
+        .json({
+          status: 'success',
+          statusCode: 200,
+          message: Message.USER.UPDATED,
+        });
     } catch (err) {
       next(err);
     }
@@ -50,12 +56,17 @@ export class UserController {
     const { id } = req.params;
     try {
       await this.userService.deleteUser(id);
-      res.status(200).json({ status: 'success', statusCode: 200, message: Message.USER.DELETED });
+      res
+        .status(200)
+        .json({
+          status: 'success',
+          statusCode: 200,
+          message: Message.USER.DELETED,
+        });
     } catch (err) {
-      next(err)
+      next(err);
     }
   }
-
 
   routes() {
     this.router.get('/', this.getAll);

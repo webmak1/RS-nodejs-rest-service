@@ -40,7 +40,7 @@ class Server {
 
     this.app.use('/users', this.userController.router);
     this.app.use('/boards', this.boardController.router);
-    this.app.use('/boards/:id/tasks', this.taskController.router);
+    this.app.use('/boards/:boardId/tasks', this.taskController.router);
 
     this.app.use((err, req, res, next) => {
       handleError(err, res);

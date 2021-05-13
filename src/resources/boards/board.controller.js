@@ -39,7 +39,13 @@ export class BoardController {
     const board = req.body;
     try {
       await this.boardService.update(id, board);
-      res.status(200).json({ status: 'success', statusCode: 200, message: Message.BOARD.UPDATED });
+      res
+        .status(200)
+        .json({
+          status: 'success',
+          statusCode: 200,
+          message: Message.BOARD.UPDATED,
+        });
     } catch (err) {
       next(err);
     }
@@ -49,9 +55,15 @@ export class BoardController {
     const { id } = req.params;
     try {
       await this.boardService.deleteBoard(id);
-      res.status(200).json({ status: 'success', statusCode: 200, message: Message.BOARD.DELETED });
+      res
+        .status(200)
+        .json({
+          status: 'success',
+          statusCode: 200,
+          message: Message.BOARD.DELETED,
+        });
     } catch (err) {
-      next(err)
+      next(err);
     }
   }
 

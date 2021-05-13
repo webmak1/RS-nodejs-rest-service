@@ -2,7 +2,6 @@ import { Board } from './board.model.js';
 import { Repository } from '../../common/repository.js';
 
 export class BoardRepository extends Repository {
-
   async getAll() {
     return this.db.getBoards();
   }
