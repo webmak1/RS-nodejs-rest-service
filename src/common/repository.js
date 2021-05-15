@@ -1,4 +1,4 @@
-import { database } from '../resources/db/database.js';
+import { database } from '../db/database.js';
 
 export class Repository {
   constructor() {
