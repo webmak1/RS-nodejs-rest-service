@@ -4,9 +4,9 @@ import { fileURLToPath } from 'url';
 import YAML from 'yamljs';
 import * as swaggerUI from 'swagger-ui-express';
 import { config } from './common/config.js';
-import { UserController } from './resources/users/user.controller.js';
-import { BoardController } from './resources/boards/board.controller.js';
-import { TaskController } from './resources/tasks/task.controller.js';
+import { UsersController } from './resources/users/users.controller.js';
+import { BoardsController } from './resources/boards/boards.controller.js';
+import { TasksController } from './resources/tasks/tasks.controller.js';
 import { handleError } from './middlewares/error.js';
 
 class Server {
@@ -15,9 +15,9 @@ class Server {
     this.swaggerDocument = YAML.load(
       path.join(dirname(fileURLToPath(import.meta.url)), '../doc/api.yaml')
     );
-    this.userController = new UserController();
-    this.boardController = new BoardController();
-    this.taskController = new TaskController();
+    this.usersController = new UsersController();
+    this.boardsController = new BoardsController();
+    this.tasksController = new TasksController();
     this.routes();
   }
 
@@ -38,9 +38,9 @@ class Server {
       next();
     });
 
-    this.app.use('/users', this.userController.router);
-    this.app.use('/boards', this.boardController.router);
-    this.app.use('/boards/:boardId/tasks', this.taskController.router);
+    this.app.use('/users', this.usersController.router);
+    this.app.use('/boards', this.boardsController.router);
+    this.app.use('/boards/:boardId/tasks', this.tasksController.router);
 
     this.app.use((err, req, res, next) => {
       handleError(err, res);

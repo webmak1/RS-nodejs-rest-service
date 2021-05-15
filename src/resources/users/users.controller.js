@@ -1,11 +1,11 @@
 import { Router } from 'express';
-import { UserService } from './user.service.js';
+import { UsersService } from './users.service.js';
 import { User } from './user.model.js';
 import { Message } from '../../common/const.js';
 
-export class UserController {
+export class UsersController {
   constructor() {
-    this.userService = new UserService();
+    this.userService = new UsersService();
     this.router = Router();
     this.routes();
   }

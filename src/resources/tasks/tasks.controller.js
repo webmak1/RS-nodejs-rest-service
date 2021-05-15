@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import { TaskService } from './task.service.js';
+import { TasksService } from './tasks.service.js';
 import { Message } from '../../common/const.js';
 
-export class TaskController {
+export class TasksController {
   constructor() {
-    this.taskService = new TaskService();
+    this.tasksService = new TasksService();
     this.router = Router({ mergeParams: true });
     this.routes();
   }
@@ -12,7 +12,7 @@ export class TaskController {
   getAll = async (req, res, next) => {
     try {
       const { boardId } = req.params;
-      const tasks = await this.taskService.getAll(boardId);
+      const tasks = await this.tasksService.getAll(boardId);
       res.json(tasks);
     } catch (err) {
       next(err);
@@ -23,7 +23,7 @@ export class TaskController {
     try {
       const { boardId } = req.params;
       const taskDto = req.body;
-      const tasks = await this.taskService.create(boardId, taskDto);
+      const tasks = await this.tasksService.create(boardId, taskDto);
       res.status(201).json(tasks);
     } catch (err) {
       next(err);
@@ -33,7 +33,7 @@ export class TaskController {
   getById = async (req, res, next) => {
     try {
       const { id, boardId } = req.params;
-      const task = await this.taskService.getById(id, boardId);
+      const task = await this.tasksService.getById(id, boardId);
       res.status(200).json(task);
     } catch (err) {
       next(err);
@@ -44,7 +44,7 @@ export class TaskController {
     try {
       const { id, boardId } = req.params;
       const taskDto = req.body;
-      const task = await this.taskService.update(id, boardId, taskDto);
+      const task = await this.tasksService.update(id, boardId, taskDto);
       res.status(200).json(task);
     } catch (err) {
       next(err);
@@ -54,7 +54,7 @@ export class TaskController {
   delete = async (req, res, next) => {
     try {
       const { id, boardId } = req.params;
-      await this.taskService.delete(id, boardId);
+      await this.tasksService.delete(id, boardId);
       res
         .status(200)
         .json({

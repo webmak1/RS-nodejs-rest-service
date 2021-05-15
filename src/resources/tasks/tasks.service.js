@@ -1,7 +1,7 @@
 import { TaskRepository } from './task.memory.repository.js';
 import { ErrorHandler } from '../../middlewares/error.js';
 
-export class TaskService {
+export class TasksService {
   constructor() {
     this.taskRepository = new TaskRepository();
   }

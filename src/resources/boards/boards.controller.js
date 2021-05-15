@@ -1,29 +1,29 @@
 import { Router } from 'express';
-import { BoardService } from './board.service.js';
+import { BoardsService } from './boards.service.js';
 import { Message } from '../../common/const.js';
 
-export class BoardController {
+export class BoardsController {
   constructor() {
-    this.boardService = new BoardService();
+    this.boardsService = new BoardsService();
     this.router = Router();
     this.routes();
   }
 
   getAll = async (req, res) => {
-    const boards = await this.boardService.getAll();
+    const boards = await this.boardsService.getAll();
     res.json(boards);
   };
 
   create = async (req, res) => {
     const boardDto = req.body;
-    const board = await this.boardService.create(boardDto);
+    const board = await this.boardsService.create(boardDto);
     res.status(201).json(board);
   };
 
   getById = async (req, res, next) => {
     const { id } = req.params;
     try {
-      const board = await this.boardService.getById(id);
+      const board = await this.boardsService.getById(id);
       res.status(200).json(board);
     } catch (err) {
       next(err);
@@ -34,7 +34,7 @@ export class BoardController {
     const { id } = req.params;
     const boardDto = req.body;
     try {
-      const board = await this.boardService.update(id, boardDto);
+      const board = await this.boardsService.update(id, boardDto);
       res.status(200).json(board);
     } catch (err) {
       next(err);
@@ -44,7 +44,7 @@ export class BoardController {
   delete = async (req, res, next) => {
     const { id } = req.params;
     try {
-      await this.boardService.deleteBoard(id);
+      await this.boardsService.deleteBoard(id);
       res.status(200).json({
         status: 'success',
         statusCode: res.statusCode,

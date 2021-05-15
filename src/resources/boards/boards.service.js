@@ -1,11 +1,11 @@
 import { BoardRepository } from './board.memory.repository.js';
 import { ErrorHandler } from '../../middlewares/error.js';
-import { TaskService } from '../tasks/task.service.js';
+import { TasksService } from '../tasks/tasks.service.js';
 
-export class BoardService {
+export class BoardsService {
   constructor() {
     this.boardRepository = new BoardRepository();
-    this.taskService = new TaskService();
+    this.tasksService = new TasksService();
   }
 
   async getAll() {
@@ -35,6 +35,6 @@ export class BoardService {
   async deleteBoard(id) {
     await this.getById(id);
     await this.boardRepository.deleteBoard(id);
-    await this.taskService.removeByBoard(id);
+    await this.tasksService.removeByBoard(id);
   }
 }
