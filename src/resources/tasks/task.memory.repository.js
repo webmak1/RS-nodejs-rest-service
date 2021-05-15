@@ -2,14 +2,6 @@ import { Repository } from '../../common/repository.js';
 import { Task } from './task.model.js';
 
 export class TaskRepository extends Repository {
-  async removeByBoard(boardId) {
-    return this.db.removeByBoard(boardId);
-  }
-
-  async unassignUserTasks(userId) {
-    return this.db.unassignUserTasks(userId);
-  }
-
   async getAll(boardId) {
     return this.db.getTasks(boardId);
   }
@@ -28,5 +20,13 @@ export class TaskRepository extends Repository {
 
   async delete(id) {
     return this.db.deleteTask(id);
+  }
+
+  async removeByBoard(boardId) {
+    return this.db.removeByBoard(boardId);
+  }
+
+  async unassignUserTasks(userId) {
+    return this.db.unassignUserTasks(userId);
   }
 }

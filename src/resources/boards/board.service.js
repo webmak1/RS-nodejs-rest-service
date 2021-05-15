@@ -29,6 +29,7 @@ export class BoardService {
     updatedBoard.title = board.title;
     updatedBoard.columns = board.columns;
     await this.boardRepository.update(updatedBoard);
+    return updatedBoard;
   }
 
   async deleteBoard(id) {

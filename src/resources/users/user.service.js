@@ -30,6 +30,7 @@ export class UserService {
     updatedUser.login = user.login;
     updatedUser.password = user.password;
     await this.userRepository.update(updatedUser);
+    return updatedUser;
   }
 
   async deleteUser(id) {

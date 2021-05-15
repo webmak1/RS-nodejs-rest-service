@@ -13,12 +13,13 @@ export class UserController {
   getAll = async (req, res) => {
     const users = await this.userService.getAll();
     res.json(users.map(User.toResponse));
-  }
+  };
 
   create = async (req, res) => {
-    const user = await this.userService.create(req.body);
+    const userDto = req.body;
+    const user = await this.userService.create(userDto);
     res.status(201).json(User.toResponse(user));
-  }
+  };
 
   getById = async (req, res, next) => {
     const { id } = req.params;
@@ -28,40 +29,32 @@ export class UserController {
     } catch (err) {
       next(err);
     }
-  }
+  };
 
   update = async (req, res, next) => {
     const { id } = req.params;
-    const user = req.body;
+    const userDto = req.body;
     try {
-      await this.userService.update(id, user);
-      res
-        .status(200)
-        .json({
-          status: 'success',
-          statusCode: 200,
-          message: Message.USER.UPDATED,
-        });
+      const user = await this.userService.update(id, userDto);
+      res.status(200).json(User.toResponse(user));
     } catch (err) {
       next(err);
     }
-  }
+  };
 
   delete = async (req, res, next) => {
     const { id } = req.params;
     try {
       await this.userService.deleteUser(id);
-      res
-        .status(200)
-        .json({
-          status: 'success',
-          statusCode: 200,
-          message: Message.USER.DELETED,
-        });
+      res.status(200).json({
+        status: 'success',
+        statusCode: res.statusCode,
+        message: Message.USER.DELETED,
+      });
     } catch (err) {
       next(err);
     }
-  }
+  };
 
   routes() {
     this.router.get('/', this.getAll);

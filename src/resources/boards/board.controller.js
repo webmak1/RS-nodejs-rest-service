@@ -12,12 +12,13 @@ export class BoardController {
   getAll = async (req, res) => {
     const boards = await this.boardService.getAll();
     res.json(boards);
-  }
+  };
 
   create = async (req, res) => {
-    const board = await this.boardService.create(req.body);
+    const boardDto = req.body;
+    const board = await this.boardService.create(boardDto);
     res.status(201).json(board);
-  }
+  };
 
   getById = async (req, res, next) => {
     const { id } = req.params;
@@ -27,40 +28,32 @@ export class BoardController {
     } catch (err) {
       next(err);
     }
-  }
+  };
 
   update = async (req, res, next) => {
     const { id } = req.params;
-    const board = req.body;
+    const boardDto = req.body;
     try {
-      await this.boardService.update(id, board);
-      res
-        .status(200)
-        .json({
-          status: 'success',
-          statusCode: 200,
-          message: Message.BOARD.UPDATED,
-        });
+      const board = await this.boardService.update(id, boardDto);
+      res.status(200).json(board);
     } catch (err) {
       next(err);
     }
-  }
+  };
 
   delete = async (req, res, next) => {
     const { id } = req.params;
     try {
       await this.boardService.deleteBoard(id);
-      res
-        .status(200)
-        .json({
-          status: 'success',
-          statusCode: 200,
-          message: Message.BOARD.DELETED,
-        });
+      res.status(200).json({
+        status: 'success',
+        statusCode: res.statusCode,
+        message: Message.BOARD.DELETED,
+      });
     } catch (err) {
       next(err);
     }
-  }
+  };
 
   routes() {
     this.router.get('/', this.getAll);

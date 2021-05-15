@@ -6,14 +6,6 @@ export class TaskService {
     this.taskRepository = new TaskRepository();
   }
 
-  async removeByBoard(boardId) {
-    await this.taskRepository.removeByBoard(boardId);
-  }
-
-  async unassignUserTasks(userId) {
-    await this.taskRepository.unassignUserTasks(userId);
-  }
-
   async getAll(boardId) {
     return this.taskRepository.getAll(boardId);
   }
@@ -39,7 +31,7 @@ export class TaskService {
     updatedTask.order = task.order;
     updatedTask.description = task.description;
     updatedTask.userId = task.userId;
-    updatedTask.boardId = task.boardId || boardId;
+    updatedTask.boardId = boardId;
     updatedTask.columnId = task.columnId;
     await this.taskRepository.update(updatedTask);
     return updatedTask;
@@ -48,5 +40,13 @@ export class TaskService {
   async delete(id, boardId) {
     await this.getById(id, boardId);
     await this.taskRepository.delete(id);
+  }
+
+  async removeByBoard(boardId) {
+    return this.taskRepository.removeByBoard(boardId);
+  }
+
+  async unassignUserTasks(userId) {
+    await this.taskRepository.unassignUserTasks(userId);
   }
 }

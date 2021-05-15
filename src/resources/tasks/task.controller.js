@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { TaskService } from './task.service.js';
+import { Message } from '../../common/const.js';
 
 export class TaskController {
   constructor() {
@@ -16,17 +17,18 @@ export class TaskController {
     } catch (err) {
       next(err);
     }
-  }
+  };
 
   create = async (req, res, next) => {
     try {
       const { boardId } = req.params;
-      const tasks = await this.taskService.create(boardId, req.body);
+      const taskDto = req.body;
+      const tasks = await this.taskService.create(boardId, taskDto);
       res.status(201).json(tasks);
     } catch (err) {
       next(err);
     }
-  }
+  };
 
   getById = async (req, res, next) => {
     try {
@@ -36,17 +38,18 @@ export class TaskController {
     } catch (err) {
       next(err);
     }
-  }
+  };
 
   update = async (req, res, next) => {
     try {
       const { id, boardId } = req.params;
-      const task = await this.taskService.update(id, boardId, req.body);
+      const taskDto = req.body;
+      const task = await this.taskService.update(id, boardId, taskDto);
       res.status(200).json(task);
     } catch (err) {
       next(err);
     }
-  }
+  };
 
   delete = async (req, res, next) => {
     try {
@@ -54,11 +57,15 @@ export class TaskController {
       await this.taskService.delete(id, boardId);
       res
         .status(200)
-        .json({ status: 'success', statusCode: 200, message: 'OK' });
+        .json({
+          status: 'success',
+          statusCode: res.statusCode,
+          message: Message.TASK.DELETED,
+        });
     } catch (err) {
       next(err);
     }
-  }
+  };
 
   routes() {
     this.router.get('/', this.getAll);
