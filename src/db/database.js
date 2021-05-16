@@ -1,4 +1,4 @@
-export class Database {
+class Database {
   constructor() {
     this._users = [];
     this._boards = [];

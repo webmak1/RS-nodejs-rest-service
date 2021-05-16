@@ -55,13 +55,11 @@ export class TasksController {
     try {
       const { id, boardId } = req.params;
       await this.tasksService.delete(id, boardId);
-      res
-        .status(200)
-        .json({
-          status: 'success',
-          statusCode: res.statusCode,
-          message: Message.TASK.DELETED,
-        });
+      res.status(200).json({
+        status: 'success',
+        statusCode: res.statusCode,
+        message: Message.TASK.DELETED,
+      });
     } catch (err) {
       next(err);
     }
